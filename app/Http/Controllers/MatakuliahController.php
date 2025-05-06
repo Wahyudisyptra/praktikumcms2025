@@ -3,39 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Matakuliah;
+use App\Models\MataKuliah;
 
-class MatakuliahController extends Controller
+class MataKuliahController extends Controller
 {
     public function index()
     {
-        $matakuliahs = Matakuliah::all();
-        return view('matakuliah.index', compact('matakuliahs'));
+        return view('matakuliah.index');
     }
 
-    public function show($id)
+    public function store(Request $request)
     {
-        $matakuliah = Matakuliah::find($id);
-        if (!$matakuliah) {
-            abort(404);
-        }
-        return view('matakuliah.show', compact('matakuliah'));
-    }
-
-    public function daftar(Request $request)
-    {
-        return redirect()->back()->with([
-            'daftar_success' => true,
+        MataKuliah::create([
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'semester' => $request->semester,
             'mata_kuliah' => $request->mata_kuliah,
-            'nim' => $request->nim,
+            'jadwal' => $request->jadwal,
         ]);
+
+        return redirect()->route('matakuliah.index')->with('success', 'Berhasil mendaftar mata kuliah!');
     }
 
-    public function dosen(Request $request)
+    public function show(Request $request)
     {
-        return redirect()->back()->with([
-            'dosen_success' => true,
-            'nama_dosen' => $request->nama_dosen,
-        ]);
+        $jadwal = null;
+
+        if ($request->filled('nama_mahasiswa') && $request->filled('semester')) {
+            $jadwal = MataKuliah::where('nama_mahasiswa', $request->nama_mahasiswa)
+                ->where('semester', $request->semester)
+                ->get();
+        }
+
+        return view('matakuliah.show', compact('jadwal'));
     }
 }
