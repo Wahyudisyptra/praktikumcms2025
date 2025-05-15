@@ -1,24 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
-<h2>Lihat Jadwal Mata Kuliah</h2>
+<h2>Detail Mata Kuliah</h2>
 
-<form method="GET" action="{{ route('matakuliah.show') }}">
-    <label>Semester:</label><br>
-    <input type="number" name="semester" required value="{{ request('semester') }}"><br><br>
-    <button type="submit">Lihat Jadwal</button>
-</form>
-
-@if(isset($jadwal))
-    <h3>Jadwal Semester {{ request('semester') }}</h3>
-    @if($jadwal->isEmpty())
-        <p>Tidak ada jadwal tersedia.</p>
-    @else
-        <ul>
-            @foreach($jadwal as $item)
-                <li>{{ $item->nama_mahasiswa }} - {{ $item->mata_kuliah }} - {{ $item->jadwal }}</li>
-            @endforeach
-        </ul>
-    @endif
-@endif
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ $item->nama_mahasiswa }}</h5>
+        <p class="card-text"><strong>Semester:</strong> {{ $item->semester }}</p>
+        <p class="card-text"><strong>Mata Kuliah:</strong> {{ $item->mata_kuliah }}</p>
+        <p class="card-text"><strong>Jadwal:</strong> {{ $item->jadwal }}</p>
+        <a href="{{ route('matakuliah.index') }}" class="btn btn-secondary">Kembali</a>
+    </div>
+</div>
 @endsection

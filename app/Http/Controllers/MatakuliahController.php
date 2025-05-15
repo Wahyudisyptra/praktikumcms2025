@@ -9,31 +9,59 @@ class MataKuliahController extends Controller
 {
     public function index()
     {
-        return view('matakuliah.index');
+        $data = MataKuliah::all();
+        return view('matakuliah.index', compact('data'));
+    }
+
+    public function create()
+    {
+        return view('matakuliah.create');
     }
 
     public function store(Request $request)
     {
-        MataKuliah::create([
-            'nama_mahasiswa' => $request->nama_mahasiswa,
-            'semester' => $request->semester,
-            'mata_kuliah' => $request->mata_kuliah,
-            'jadwal' => $request->jadwal,
+        $request->validate([
+            'nama_mahasiswa' => 'required|string|max:255',
+            'semester' => 'required|integer',
+            'mata_kuliah' => 'required|string|max:255',
+            'jadwal' => 'required|string|max:255',
         ]);
 
-        return redirect()->route('matakuliah.index')->with('success', 'Berhasil mendaftar mata kuliah!');
+        MataKuliah::create($request->all());
+
+        return redirect()->route('matakuliah.index')->with('success', 'Data berhasil disimpan!');
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
-        $jadwal = null;
+        $item = MataKuliah::findOrFail($id);
+        return view('matakuliah.show', compact('item'));
+    }
 
-        if ($request->filled('nama_mahasiswa') && $request->filled('semester')) {
-            $jadwal = MataKuliah::where('nama_mahasiswa', $request->nama_mahasiswa)
-                ->where('semester', $request->semester)
-                ->get();
-        }
+    public function edit($id)
+    {
+        $item = MataKuliah::findOrFail($id);
+        return view('matakuliah.edit', compact('item'));
+    }
 
-        return view('matakuliah.show', compact('jadwal'));
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_mahasiswa' => 'required|string|max:255',
+            'semester' => 'required|integer',
+            'mata_kuliah' => 'required|string|max:255',
+            'jadwal' => 'required|string|max:255',
+        ]);
+
+        $item = MataKuliah::findOrFail($id);
+        $item->update($request->all());
+
+        return redirect()->route('matakuliah.index')->with('success', 'Data berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+        MataKuliah::findOrFail($id)->delete();
+        return redirect()->route('matakuliah.index')->with('success', 'Data berhasil dihapus!');
     }
 }
