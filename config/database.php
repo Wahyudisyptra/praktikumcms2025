@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'oracle'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,17 +35,21 @@ return [
 
     'connections' => [
         'oracle' => [
- 'driver' => 'oracle',
- 'tns' => env('DB_TNS', ''),
- 'host' => env('DB_HOST', 'localhost'),
- 'port' => env('DB_PORT', '1521'),
- 'database' => env('DB_DATABASE', 'XE'),
- 'username' => env('DB_USERNAME', 'c##putraproject'),
- 'password' => env('DB_PASSWORD', '773'),
- 'charset' => 'AL32UTF8',
- 'prefix' => '',
- 'prefix_schema' => env('DB_SCHEMA_PREFIX', ''),
- ],
+            'driver'         => 'oracle',
+            'tns'            => '',
+            'host'           => env('DB_HOST', 'localhost'),
+            'port'           => env('DB_PORT', '1521'),
+            'database'       => env('DB_DATABASE', 'XE'),
+            'username'       => env('DB_USERNAME', 'c##praktikumcms'),
+            'password'       => env('DB_PASSWORD', '0707'),
+            'charset'        => '',
+            'prefix'         => '',
+            'prefix_schema'  => env('DB_SCHEMA_PREFIX', ''),
+            'edition'        => 'ora$base',
+            'server_version' => '21c',
+            'session_mode'   => OCI_DEFAULT,
+        ],
+
 
         'sqlite' => [
             'driver' => 'sqlite',
