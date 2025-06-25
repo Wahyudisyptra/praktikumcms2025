@@ -19,6 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('matakuliah.create') }}">Tambah</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('image.upload') }}">Upload</a>
+                </li>
             </ul>
         </div>
     </div>

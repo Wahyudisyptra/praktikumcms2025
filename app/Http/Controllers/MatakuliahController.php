@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MataKuliah;
+use Illuminate\Database\Eloquent\ModelNotFoundException; // tambahkan di atas
 
 class MataKuliahController extends Controller
 {
@@ -34,8 +35,13 @@ class MataKuliahController extends Controller
 
     public function show($id)
     {
+         try {
         $item = MataKuliah::findOrFail($id);
         return view('matakuliah.show', compact('item'));
+    }   catch (ModelNotFoundException $e) {
+        return redirect()->route('matakuliah.index')->with('error', 'Data mata kuliah tidak ditemukan.');
+    }
+        
     }
 
     public function edit($id)
