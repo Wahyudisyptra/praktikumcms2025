@@ -22,7 +22,7 @@ class DosenController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:50',
+            'nip' => 'nullable|string|min:0|max:50',
             'email' => 'required|email|unique:dosens,email',
         ]);
         Dosen::create($request->all());
