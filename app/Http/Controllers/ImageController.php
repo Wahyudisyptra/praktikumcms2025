@@ -22,7 +22,7 @@ class ImageController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'image' => 'required|file|mimes:pdf,doc,docx,ppt,pptx,txt,jpg,jpeg,png|max:5120',
+            'image' => 'required|file|mimes:pdf,doc,docx,ppt,pptx,txt|max:5120',
         ]);
 
         $imagePath = $request->file('image')->store('materi', 'public');
@@ -32,7 +32,7 @@ class ImageController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('image.upload')->with('success', 'Materi berhasil diupload!');
+        return redirect()->route('image.upload')->with('success', 'File berhasil diupload!');
     }
 
     public function destroy($id)

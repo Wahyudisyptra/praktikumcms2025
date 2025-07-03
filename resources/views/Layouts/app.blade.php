@@ -1,4 +1,9 @@
-// ... existing code ...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Mata Kuliah</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
     body {
@@ -23,4 +28,12 @@
         box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
     </style>
-// ... existing code ...
+</head>
+<body>
+    @include('partials.navbar')
+    <main class="py-4">
+        @yield('content')
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
