@@ -36,22 +36,31 @@
                 </form>
             </div>
         </div>
-        @if (isset($image))
-            <div class="card mt-4 shadow-sm">
-                <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Gambar yang baru diupload</h5>
-                </div>
-                <div class="card-body text-center">
-                    <p><strong>{{ $image->title }}</strong></p>
-                    <img src="{{ asset('storage/' . $image->image_path) }}" class="img-fluid rounded" style="max-width: 300px;"><br><br>
-                    <form action="{{ route('image.delete', $image->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus gambar ini?')">Hapus Gambar</button>
-                    </form>
-                </div>
-            </div>
-        @endif
     </div>
 </div>
+@if(isset($allImages) && $allImages->count())
+    <div class="mt-5">
+        <h5>Daftar Materi yang Sudah Diupload</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Judul Materi</th>
+                    <th>File</th>
+                    <th>Waktu Upload</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($allImages as $img)
+                <tr>
+                    <td>{{ $img->title }}</td>
+                    <td>
+                        <a href="{{ asset('storage/' . $img->image_path) }}" target="_blank" class="btn btn-sm btn-info">Lihat/Download</a>
+                    </td>
+                    <td>{{ $img->created_at->format('d-m-Y H:i') }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endif
 @endsection

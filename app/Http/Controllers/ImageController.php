@@ -13,26 +13,26 @@ class ImageController extends Controller
     public function create()
     {
         $image = Image::latest()->first();
-        $matakuliahs = MataKuliah::all();
-        return view('upload', compact('image', 'matakuliahs'));
+        $matakuliahs = \App\Models\MataKuliah::all();
+        $allImages = Image::orderBy('created_at', 'desc')->get();
+        return view('upload', compact('image', 'matakuliahs', 'allImages'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|file|mimes:pdf,doc,docx,ppt,pptx,txt,jpg,jpeg,png|max:5120',
         ]);
 
-        $imagePath = $request->file('image')->store('images', 'public');
+        $imagePath = $request->file('image')->store('materi', 'public');
 
-        $image = Image::create([
+        \App\Models\Image::create([
             'title' => $request->title,
             'image_path' => $imagePath,
         ]);
 
-        return view('upload', ['image' => $image])
-            ->with('success', 'Gambar berhasil diupload.');
+        return redirect()->route('image.upload')->with('success', 'Materi berhasil diupload!');
     }
 
     public function destroy($id)
