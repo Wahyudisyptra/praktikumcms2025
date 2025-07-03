@@ -1,4 +1,5 @@
-// ... existing code ...
+@extends('layouts.app')
+@section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Daftar Mata Kuliah</h3>
     <a href="{{ route('matakuliah.create') }}" class="btn btn-success">+ Tambah</a>
@@ -43,4 +44,4 @@
     </div>
     @endforelse
 </div>
-// ... existing code ...
+@endsection
