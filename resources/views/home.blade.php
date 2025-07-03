@@ -18,13 +18,13 @@
     </div>
 </div>
 <div class="container mt-4">
-    <div class="card shadow-lg">
+    <div class="card shadow-lg border-0" style="border-radius:1.2rem;">
         <div class="card-body">
             <h3 class="mb-4">Selamat Datang, {{ Auth::user()->name }}!</h3>
             <div class="row g-3">
                 <div class="col-md-4">
                     <a href="{{ route('matakuliah.index') }}" class="text-decoration-none">
-                        <div class="card card-dashboard text-white bg-primary mb-3 h-100" style="cursor:pointer;">
+                        <div class="card card-dashboard text-white mb-3 h-100" style="background: linear-gradient(135deg, #4e73df 0%, #1cc88a 100%);">
                             <div class="card-body text-center">
                                 <div class="fw-bold fs-6 mb-2">Total Data Mata Kuliah</div>
                                 <div class="display-6 fw-bold">{{ $jumlah_mk }}</div>
@@ -33,7 +33,7 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="card card-dashboard text-white mb-3 h-100" style="background-color:#5cb85c; opacity:0.7;">
+                    <div class="card card-dashboard text-white mb-3 h-100" style="background: linear-gradient(135deg, #1cc88a 0%, #36b9cc 100%);">
                         <div class="card-body text-center">
                             <div class="fw-bold fs-6 mb-2">Total Data Dosen</div>
                             <div class="display-6 fw-bold">0</div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card card-dashboard text-white mb-3 h-100" style="background-color:#f6c23e; opacity:0.7;">
+                    <div class="card card-dashboard text-white mb-3 h-100" style="background: linear-gradient(135deg, #f6c23e 0%, #fd7e14 100%);">
                         <div class="card-body text-center">
                             <div class="fw-bold fs-6 mb-2">Total Data Mahasiswa</div>
                             <div class="display-6 fw-bold">{{ $jumlah_mahasiswa }}</div>
