@@ -9,6 +9,15 @@
             </div>
             <div class="card-body">
                 <p class="text-muted">Silakan upload file materi untuk mata kuliah yang tersedia. Hanya admin/dosen yang dapat mengakses fitur ini.</p>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
